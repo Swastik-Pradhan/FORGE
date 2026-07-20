@@ -1,15 +1,29 @@
 import typer
-from rich.console import Console
 
-app = typer.Typer()
-console = Console()
+from forge.dev.generator import (
+    generate_readme,
+    generate_dockerfile,
+    generate_gitignore,
+)
+
+from forge.utils.console import console
+
+app = typer.Typer(help="Developer utilities.")
 
 
 @app.command()
-def init():
-    console.print("[green]Project Initializer Coming Soon[/green]")
+def readme(project: str):
+    generate_readme(project)
+    console.print("[green]README generated.[/green]")
 
 
 @app.command()
 def dockerize():
-    console.print("[blue]Docker Setup Coming Soon[/blue]")
+    generate_dockerfile()
+    console.print("[green]Dockerfile generated.[/green]")
+
+
+@app.command()
+def gitignore():
+    generate_gitignore()
+    console.print("[green].gitignore generated.[/green]")

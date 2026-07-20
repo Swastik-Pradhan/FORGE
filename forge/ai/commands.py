@@ -1,15 +1,32 @@
 import typer
-from rich.console import Console
 
-app = typer.Typer()
-console = Console()
+from forge.ai.service import summarize_file
+from forge.utils.console import console
 
-
-@app.command()
-def summarize():
-    console.print("[cyan]AI Summarize Command Coming Soon[/cyan]")
+app = typer.Typer(
+    help="AI-powered developer commands."
+)
 
 
 @app.command()
-def explain():
-    console.print("[magenta]AI Explain Command Coming Soon[/magenta]")
+def summarize(file: str):
+    """
+    Summarize a source code file using the local AI model.
+
+    Example:
+        forge ai summarize main.py
+    """
+    try:
+        result = summarize_file(file)
+
+        console.print(f"\n[bold blue]File:[/bold blue] {result.file_name}")
+        console.print(f"[bold blue]Model:[/bold blue] {result.model}")
+
+        console.print("\n[bold green]Summary[/bold green]\n")
+        console.print(result.summary)
+
+    except FileNotFoundError:
+        console.print(f"[bold red]Error:[/bold red] File '{file}' not found.")
+
+    except Exception as e:
+        console.print(f"[bold red]Error:[/bold red] {e}")
