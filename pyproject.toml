@@ -1,22 +1,16 @@
-forge/
-├── utils/
-│   ├── config.py
-│   ├── console.py
-│   ├── files.py
-│   └── logger.py
-├── ai/
-│   ├── service.py
-│   ├── prompts.py
-│   └── models.py
-├── git/
-│   ├── service.py
-│   └── github.py
-├── dev/
-│   ├── generator.py
-│   └── templates.py
-├── db/
-│   ├── connection.py
-│   └── service.py
-└── security/
-    ├── hashing.py
-    └── scanner.py
+[project]
+name = "forge-cli"
+version = "0.2.0"
+description = "AI-powered developer CLI"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "typer",
+    "rich",
+    "ollama",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
